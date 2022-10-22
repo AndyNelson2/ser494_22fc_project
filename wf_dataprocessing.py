@@ -2,12 +2,10 @@ import numpy as np
 import pandas as pd
 
 __author__ = "Andy Nelson"
-__date__ = "September 25, 2022"
+__date__ = "Octcober 22, 2022"
 
-from regex import Regex
-
-__assignment = "SER*94: Homework 2 Q4 Programming"
-
+__assignment = "SER*94: MS 3: Data Munging and Visualization"
+data = []
 
 def web_scrapping(url, classname):
     # Import Requests, Beautiful Soup
@@ -46,19 +44,6 @@ def web_scrapping(url, classname):
 
 
 def preprocessing(plays, downs, third):
-    # Import nltk - only use nltk library to perform all the following processing.
-    import nltk
-    import re
-    """
-    :param reviews: Reviews list
-    :return: Dataframe with processed reviews
-
-    Lower-case all words.
-    Remove all punctuations.
-    Remove stopwords. (Stopwords are the lists in the nltk library that are trivial and not relevant to the context/text.)
-    Perform lemmatization on the data.
-    """
-    # TODO
 
     # print(reviews['review'].lower())
     play_count = 0
@@ -95,22 +80,37 @@ def preprocessing(plays, downs, third):
     penguin = True
     while penguin:
         print("count is: ", count)
-        if analyze_plays[count] == analyze_plays[count + 1]:
-            print("error 2, removing", analyze_downs.pop(count))
-            print("error 2, removing", analyze_plays.pop(count))
-            print("error 2, removing", analyze_downs.pop(count))
-            print("error 2, removing", analyze_plays.pop(count))
-            count -= 1
-            pass
-        if count == len(analyze_plays) - 2:
+        if count <= len(analyze_plays)-2:
+            if analyze_plays[count] == analyze_plays[count + 1]:
+                print("error 2, removing", analyze_downs.pop(count))
+                print("error 2, removing", analyze_plays.pop(count))
+                print("error 2, removing", analyze_downs.pop(count))
+                print("error 2, removing", analyze_plays.pop(count))
+                count -= 1
+        if count >= len(analyze_plays)-1:
             penguin = False;
         count += 1
 
     count = 0
-    for thing in analyze_downs:
-        print("Down", analyze_downs[count])
-        print("Play", analyze_plays[count])
+    penguin = True
+    while penguin:
+        print("count is: ", count)
+        if '4th' in analyze_downs[count] and ('Field Goal' in analyze_plays[count] or 'kneels' in analyze_plays[count] or 'punts' in analyze_plays[count] or 'field goal' in analyze_plays[count]):
+            print("error 3, removing", analyze_downs.pop(count))
+            print("error 3, removing", analyze_plays.pop(count))
+            print("error 3, removing", analyze_downs.pop(count-1))
+            print("error 3, removing", analyze_plays.pop(count-1))
+            count -= 1
+        if count >= len(analyze_plays) - 1:
+            penguin = False;
         count += 1
+
+    count = 0
+    while count < len(analyze_plays) - 1:
+        play = [analyze_downs[count], analyze_plays[count], analyze_downs[count + 1], analyze_plays[count + 1]]
+        data.append(play)
+        #print(play)
+        count += 2
 
     # Return the dataframe with the processed data
     return None  # TODO
@@ -118,17 +118,19 @@ def preprocessing(plays, downs, third):
 
 if __name__ == '__main__':
     # give your desired urls and classnames, preferably from yelp
-    url1 = "https://www.espn.com/nfl/playbyplay/_/gameId/401437753"
+    url1 = "https://www.espn.com/nfl/playbyplay/_/gameId/40143"
+    gameID = 7752
+    url = url1 + str(gameID)
     classname1 = "post-play"
 
-    # Part 1
-    review_list1 = web_scrapping(url1, classname1)
-    # print('plays - count: ', len(review_list1[0]), review_list1[0])
-    # print('downs - count: ', len(review_list1[1]), review_list1[1])
-    # print('third - count: ', len(review_list1[2]), review_list1[2])
-
+    for x in range(0,9):
+        print("analyzing game", x)
+        url = url1 + str(gameID + x)
+        review_list1 = web_scrapping(url, classname1)
+        processed_review1 = preprocessing(review_list1[0], review_list1[1], review_list1[2])
+    for datum in data:
+        print(datum)
     # Create a pandas dataframe from array
     # df1 = pd.DataFrame(np.array(review_list1), columns=['post-play'])
 
     # Part 2
-    processed_review1 = preprocessing(review_list1[0], review_list1[1], review_list1[2])
