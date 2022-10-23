@@ -1,0 +1,1 @@
+Left: 105 Middle: 99 Right: 121 Average 3rd down: 6.0 Average 4th down: 4.1
