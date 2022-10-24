@@ -1,3 +1,51 @@
+#### SER494: Exploratory Data Munging and Visualization
+#### NFL 3rd and 4th down analysis
+#### Andy Nelson
+#### October 23, 2022
+
+## Basic Questions
+**Dataset Author(s):** ESPN
+
+**Dataset Construction Date:** September 8 - October 20
+
+**Dataset Record Count:** 179
+
+**Dataset Field Meanings:** Third down position, third down play, fourth down position, fourth down play
+
+**Dataset File Hash(es):** https://www.espn.in/nfl/playbyplay/_/gameId/401437791
+
+## Interpretable Records
+### Record 1
+**Raw Data:** Left: 105 Middle: 99 Right: 121 Average
+
+
+Interpretation:** This shows the distribution of which part of the field was targeted on third and fourth downs. 
+
+### Record 2
+**Raw Data:** Average 3rd down: 6.0 Average 4th down: 4.1
+
+**Interpretation:** The average fourth down is going to be lower than third since every team will run a play on third down despite how far away they are from the first down but on fourth down if they are super far away they are more inclined to not go for it so the average is 50% shorter. 
+
+## Data Sources
+### Transformation N
+**Description:** 
+
+The original data pulled from ESPN had all plays so I only kept the ones that were a third down followed by a fourth down. 
+I am only interested in the plays where the team goes for it on fourth down so I took out all of the third and fourth down pairs where on fourth down the team kicked a field goal or punted. 
+Then I had to extract the distance from the first down. For most data points this is simple since it says, for example, '3rd & 8' so it's 8 yards. But for plays within 10 yards of the goal line it displayed '3rd & Goal' so I then had to check the position on the field to see how far they were from scoring. 
+
+
+**Soundness Justification:** TODO
+
+(duplicate above as many times as needed; remove this line when done)
+
+
+## Visualization
+### Visual N
+**Analysis:** TODO
+
+(duplicate above as many times as needed; remove this line when done)
+
 The data came from ESPN. Each set of the plays was recorded the same day as the game was played. Each game varies in how many fourth downs occur. Some games have zero fourth downs while others can have upwards of ten. 
 Each row in data.txt has four sections. The first is the downs for the third down play, the second is the description for the play ran on that third down, then the third and fourth are the same but for fourth down. 
 Data.txt contains all of the third and fourth down plays where the team went for it on fourth for the current NFL season. 
