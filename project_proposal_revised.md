@@ -21,7 +21,11 @@ Data Sourcing: ESPN stores play by play data which can be obtained for free. I c
 
 Related Work: 
 https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1540-6261.1997.tb01129.x (original)
+
 https://journals.sagepub.com/doi/abs/10.4219/jsge-2001-659?journalCode=joab
+
 https://pubsonline.informs.org/doi/pdf/10.1287/mnsc.24.16.1758
+
 https://journals.aom.org/doi/abs/10.5465/amj.2016.0850
+
 https://www.nber.org/papers/w9024
